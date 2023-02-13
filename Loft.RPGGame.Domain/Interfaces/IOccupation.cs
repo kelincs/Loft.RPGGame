@@ -6,7 +6,7 @@ namespace Loft.RPGGame.Domain.Interfaces
     public interface IOccupation
     {
         public OccupationTypeEnum OccupationType { get; }        
-        public BeattleModifiers BeattleModifiers { get; }        
+        public BeattleModifiers BattleModifiers { get; }        
         public Attributes Attributes { get; }
 
 

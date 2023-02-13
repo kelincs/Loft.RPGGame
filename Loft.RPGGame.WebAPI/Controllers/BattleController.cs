@@ -19,7 +19,15 @@ namespace Loft.RPGGame.WebAPI.Controllers
         [HttpPost("RunBattle")]
         public ActionResult<IBattleResult> Post([FromBody] List<Guid> input)
         {
-            return Ok(_battleService.ExecuteBattle(input[0], input[1]));
+            try
+            {
+                return Ok(_battleService.ExecuteBattle(input[0], input[1]));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Loft.RPGGame.Domain.Entities
     {
         private readonly OccupationTypeEnum _occupationType;
         private readonly Attributes _attributes;
-        private readonly BeattleModifiers _beattleModifiers;
+        private readonly BattleModifiers _battleModifiers;
 
         #region Constants
         const short HEALTHPOINTS = 20;
@@ -26,21 +26,21 @@ namespace Loft.RPGGame.Domain.Entities
             _attributes.AttributesDic[AttributeTypeEnum.Dexterity] = DEXTERITY;
             _attributes.AttributesDic[AttributeTypeEnum.Intelligence] = INTELLIGENCE;
             
-            _beattleModifiers = new BeattleModifiers
+            _battleModifiers = new BattleModifiers
             {
                 CalculatedBonusStrike = ((short)((STRENGHT * 0.8) + (DEXTERITY * 0.2))),
                 CalculatedBonusSpeed = ((short)((DEXTERITY * 0.6) + (INTELLIGENCE * 0.2)))
             };
-            _beattleModifiers.BeattleBonusStrike.Add(AttributeTypeEnum.Strenght, 80);
-            _beattleModifiers.BeattleBonusStrike.Add(AttributeTypeEnum.Dexterity, 20);
+            _battleModifiers.BattleBonusStrike.Add(AttributeTypeEnum.Strenght, 80);
+            _battleModifiers.BattleBonusStrike.Add(AttributeTypeEnum.Dexterity, 20);
 
-            _beattleModifiers.BeattleBonusSpeed.Add(AttributeTypeEnum.Dexterity, 60);
-            _beattleModifiers.BeattleBonusSpeed.Add(AttributeTypeEnum.Intelligence, 20);   
+            _battleModifiers.BattleBonusSpeed.Add(AttributeTypeEnum.Dexterity, 60);
+            _battleModifiers.BattleBonusSpeed.Add(AttributeTypeEnum.Intelligence, 20);   
         }
 
         public OccupationTypeEnum OccupationType => _occupationType;        
         public Attributes Attributes => _attributes;
-        public BeattleModifiers BeattleModifiers => _beattleModifiers;
+        public BattleModifiers BattleModifiers => _battleModifiers;
 
     }
 }

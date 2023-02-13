@@ -12,7 +12,7 @@ namespace Loft.RPGGame.Application.Contracts.Validations
                 .MaximumLength(15)
                 .WithMessage("O nome não pode ter mais de 15 caracteres.")
                 .Matches(@"^[A-Za-z_]+$")
-                .WithMessage("O nome deve ser composto apenas de letras e underline (_).");
+                .WithMessage("O nome deve ser composto apenas de letras e underline (_).");           
             
         }  
     }

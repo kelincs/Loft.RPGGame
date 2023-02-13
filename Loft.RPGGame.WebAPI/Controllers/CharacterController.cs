@@ -28,9 +28,16 @@ namespace Loft.RPGGame.WebAPI.Controllers
         [HttpGet("GetAllCharacters")]
         public ActionResult<IList<ICharacterResult>> Get()
         {
-            var result = _characterService.GetAllCharacters();
+            try
+            {
+                var result = _characterService.GetAllCharacters();
 
-            return Ok(_mapper.Map<List<Character>,List<CharacterResult>>(result));
+                return Ok(_mapper.Map<List<Character>, List<CharacterResult>>(result));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); 
+            }            
         }      
 
         [HttpGet("GetCharacterDetailById")]
@@ -38,36 +45,44 @@ namespace Loft.RPGGame.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ICharacterDetailResult> GetDetailById(Guid id)
         {
-            var result = _characterService.GetCharacterById(id);
+            try
+            {
+                var result = _characterService.GetCharacterById(id);
 
-            return result is null ? NotFound() : _mapper.Map<Character, CharacterDetailResult>(result);           
-
+                return result is null ? NotFound() : _mapper.Map<Character, CharacterDetailResult>(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("AddCharacter")]
         public ActionResult Post([FromBody] CharacterRequest input)
         {
-
-            var characterRequestValidator = new CharacterRequestValidator();
-            var resultValidation = characterRequestValidator.Validate(input);
-
-
-            if (resultValidation.IsValid)
+            try
             {
-                var filledOccupation = _occupationFactory.CreateOccupation(input.OccupationType);
-                var character = new Character() { Name = input.Name, Occupation = filledOccupation };
+                var characterRequestValidator = new CharacterRequestValidator();
+                var resultValidation = characterRequestValidator.Validate(input);
 
-                _characterService.AddCharacter(character);
+                if (resultValidation.IsValid)
+                {
+                    var filledOccupation = _occupationFactory.CreateOccupation(input.OccupationType);
+                    var character = new Character() { Name = input.Name, Occupation = filledOccupation };
 
-                return Ok(input);
+                    _characterService.AddCharacter(character);
+
+                    return Ok(input);
+                }
+                else
+                {
+                    return BadRequest(resultValidation.Errors);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest(resultValidation.Errors);
+                return BadRequest(ex.Message);
             }
-
-
         }
-
     }
 }

@@ -17,7 +17,14 @@ namespace Loft.RPGGame.WebAPI.Controllers
         [HttpGet("GetAllOccupations")]
         public ActionResult<IList<IOccupation>> Get() 
         {
-            return Ok(_occupationService.GetOccupations()); 
+            try
+            {
+                return Ok(_occupationService.GetOccupations());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }            
         }
     }
 }

@@ -58,11 +58,11 @@ namespace Loft.RPGGame.WebAPI.Mappings
                 )
                 .ForMember(
                     dest => dest.Speed,
-                    opt => opt.MapFrom(src => src.Occupation.BeattleModifiers.BeattleBonusSpeed)
+                    opt => opt.MapFrom(src => src.Occupation.BattleModifiers.BattleBonusSpeed)
                 )                
                 .ForMember(
                     dest => dest.Strike,
-                    opt => opt.MapFrom(src => src.Occupation.BeattleModifiers.BeattleBonusStrike)
+                    opt => opt.MapFrom(src => src.Occupation.BattleModifiers.BattleBonusStrike)
                 );
         }
 

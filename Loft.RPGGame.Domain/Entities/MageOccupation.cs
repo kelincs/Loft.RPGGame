@@ -7,7 +7,7 @@ namespace Loft.RPGGame.Domain.Entities
     {
         private readonly OccupationTypeEnum _occupationType;
         private readonly Attributes _attributes;
-        private readonly BeattleModifiers _beattleModifiers;
+        private readonly BattleModifiers _battleModifiers;
 
         #region Constants
         const short HEALTHPOINTS = 12;
@@ -25,21 +25,21 @@ namespace Loft.RPGGame.Domain.Entities
             _attributes.AttributesDic[AttributeTypeEnum.Dexterity] = DEXTERITY;
             _attributes.AttributesDic[AttributeTypeEnum.Intelligence] = INTELLIGENCE;
 
-            _beattleModifiers = new BeattleModifiers
+            _battleModifiers = new BattleModifiers
             {
                 CalculatedBonusStrike = (short)((STRENGHT * 0.2) + (DEXTERITY * 0.5) + (INTELLIGENCE * 1.5)),
                 CalculatedBonusSpeed = (short)((STRENGHT * 0.2) + (DEXTERITY * 0.5))
             };
-            _beattleModifiers.BeattleBonusStrike.Add(AttributeTypeEnum.Strenght, 20);
-            _beattleModifiers.BeattleBonusStrike.Add(AttributeTypeEnum.Dexterity, 50);
-            _beattleModifiers.BeattleBonusStrike.Add(AttributeTypeEnum.Intelligence, 150);
+            _battleModifiers.BattleBonusStrike.Add(AttributeTypeEnum.Strenght, 20);
+            _battleModifiers.BattleBonusStrike.Add(AttributeTypeEnum.Dexterity, 50);
+            _battleModifiers.BattleBonusStrike.Add(AttributeTypeEnum.Intelligence, 150);
 
-            _beattleModifiers.BeattleBonusSpeed.Add(AttributeTypeEnum.Strenght, 20);
-            _beattleModifiers.BeattleBonusSpeed.Add(AttributeTypeEnum.Dexterity, 50);
+            _battleModifiers.BattleBonusSpeed.Add(AttributeTypeEnum.Strenght, 20);
+            _battleModifiers.BattleBonusSpeed.Add(AttributeTypeEnum.Dexterity, 50);
         }
 
         public OccupationTypeEnum OccupationType => _occupationType;
         public Attributes Attributes => _attributes;
-        public BeattleModifiers BeattleModifiers => _beattleModifiers;
+        public BattleModifiers BattleModifiers => _battleModifiers;
     }
 }

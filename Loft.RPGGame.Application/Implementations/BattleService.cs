@@ -22,7 +22,16 @@ namespace Loft.RPGGame.Application.Implementations
         public IBattleResult ExecuteBattle(Guid playerOneId, Guid playerTwoId)
         {
             _createdPlayerOne = _characterService.GetCharacterById(playerOneId);
-            _createdPlayerTwo = _characterService.GetCharacterById(playerTwoId);            
+            _createdPlayerTwo = _characterService.GetCharacterById(playerTwoId);
+
+            if (_createdPlayerOne is null)
+            {
+                throw new ArgumentException($"O personagem de id {playerOneId} não existe e não será possível a batalha.");
+            }
+            if (_createdPlayerTwo is null)
+            {
+                throw new ArgumentException($"O personagem de id {playerTwoId} não existe e não será possível a batalha.");
+            }
 
             SetWhoStarts();
 
@@ -69,8 +78,8 @@ namespace Loft.RPGGame.Application.Implementations
 
             while (!start)
             {
-                var randomSpeedPlayerOne = new Random().Next(0, _createdPlayerOne.Occupation.BeattleModifiers.CalculatedBonusSpeed);
-                var randomSpeedPlayerTwo = new Random().Next(0, _createdPlayerTwo.Occupation.BeattleModifiers.CalculatedBonusSpeed);
+                var randomSpeedPlayerOne = new Random().Next(0, _createdPlayerOne.Occupation.BattleModifiers.CalculatedBonusSpeed);
+                var randomSpeedPlayerTwo = new Random().Next(0, _createdPlayerTwo.Occupation.BattleModifiers.CalculatedBonusSpeed);
                 
                 if (randomSpeedPlayerOne > randomSpeedPlayerTwo)
                 {
@@ -90,7 +99,7 @@ namespace Loft.RPGGame.Application.Implementations
 
         private short GetRandomStrike(Character character)
         {
-            return (short)new Random().Next(0, character.Occupation.BeattleModifiers.CalculatedBonusStrike);            
+            return (short)new Random().Next(0, character.Occupation.BattleModifiers.CalculatedBonusStrike);            
         }
     }
 }

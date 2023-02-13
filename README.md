@@ -126,15 +126,15 @@ ___
 [
   {
     "occupationType": "Warrior",
-    "beattleModifiers": {
+    "battleModifiers": {
       "calculatedBonusStrike": 0,
       "calculatedBonusSpeed": 0,
-      "beattleBonusStrike": {
+      "battleBonusStrike": {
         "additionalProp1": 0,
         "additionalProp2": 0,
         "additionalProp3": 0
       },
-      "beattleBonusSpeed": {
+      "battleBonusSpeed": {
         "additionalProp1": 0,
         "additionalProp2": 0,
         "additionalProp3": 0
@@ -197,5 +197,7 @@ ___
 - Para persistir os dados em memória, escolhi utilizar o pattern Singleton, pela facilidade de implementação e garantia de persistência sem ter que me preocupar com a expiração dos dados;
 - Decidi por adicionar um ID na criação do personagem, para que todas as outras ações sejam realizadas através do mesmo, garantindo performance e consistência;
 - No endpoint que executa a batalha, é esperada uma lista de Guids, porém apenas os dois primeiros são utilizados;
+- No endpoint que executa a batalha, está sendo verificado se os dois personagens realmente existem, já que os testes foram feitos via Swagger e não pelo front (onde já possuiriam os combos com os personagens corretos), ficou como um double check;
 - Utilizei um regex na validação do nome do Personagem, garantindo que não sejam aceitos nomes que possuam caracteres diferentes de letras (maiúsculas e minúsculas) e underline;
-- Tanto a validação acima como também a validação de quantidade máxima de caracteres foram feitas utilizando-se do FluentValidation.
+- Tanto a validação acima como também a validação de quantidade máxima de caracteres foram feitas utilizando-se do FluentValidation;
+- Foi criado um projeto de teste **Loft.RPGGame.Tests**, no qual foram criados testes unitários da lógica que define os valores default dos personagens.
